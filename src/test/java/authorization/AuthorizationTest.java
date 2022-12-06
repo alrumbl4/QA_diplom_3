@@ -9,7 +9,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.chrome.ChromeDriver;
 import site.stellarburgers.Credentials;
 import site.stellarburgers.User;
 import site.stellarburgers.UserGenerator;
@@ -42,13 +41,9 @@ public class AuthorizationTest {
         userClient = new UserClient();
         user = UserGenerator.getDefaultUser();
         credentials = Credentials.from(user);
+        ValidatableResponse responseRegistration = userClient.registrationUser(user);
+        accessToken = responseRegistration.extract().path("accessToken");
         open(URL_MAIN_PAGE);
-        header.clickPersonalAccountButton();
-        authorizationPage.clickRegistrationButton();
-        registrationPage.registration(user.getName(), user.getEmail(), user.getPassword());
-        ValidatableResponse validatableResponse = userClient.authorizationUser(credentials);
-        accessToken = validatableResponse.extract().path("accessToken");
-
     }
 
     @After
@@ -60,7 +55,6 @@ public class AuthorizationTest {
     @DisplayName("Вход по кнопке 'Войти в аккаунт'")
     @Description("Проверяем возможность авторизоваться в аккаунт используя для этого кнопку 'Войти в аккаунт' на главной странице")
     public void logInUsingTheLogInToAccountButton() {
-        header.clickButtonOnTheLogo();
         mainPage.clickSignInToAccountButton();
         authorizationPage.login(credentials.getEmail(), credentials.getPassword());
         header.clickPersonalAccountButton();
@@ -73,7 +67,6 @@ public class AuthorizationTest {
     @DisplayName("Вход через кнопку 'Личный кабинет'")
     @Description("Проверяем возможность авторизоваться в аккаунт используя для этого кнопку 'Личный кабинет' в хедере")
     public void loginViaThePersonalAccountButton() {
-        header.clickButtonOnTheLogo();
         header.clickPersonalAccountButton();
         authorizationPage.login(credentials.getEmail(), credentials.getPassword());
         header.clickPersonalAccountButton();
@@ -86,6 +79,7 @@ public class AuthorizationTest {
     @DisplayName("Вход через кнопку в форме регистрации")
     @Description("Проверяем возможность авторизоваться в аккаунт используя для этого кнопку на странице регистрации")
     public void loginViaTheButtonOnTheRegistrationPage() {
+        header.clickPersonalAccountButton();
         authorizationPage.clickRegistrationButton();
         registrationPage.clickLoginButton();
         authorizationPage.login(credentials.getEmail(), credentials.getPassword());
@@ -99,6 +93,7 @@ public class AuthorizationTest {
     @DisplayName("Вход через кнопку в форме восстановления пароля")
     @Description("Проверяем возможность авторизоваться в аккаунт используя для этого кнопку 'Войти' со страницы 'Восстановление пароля'")
     public void LoginViaTheButtonInThePasswordRecoveryForm() {
+        header.clickPersonalAccountButton();
         authorizationPage.clickRestorePasswordButton();
         passwordRecoveryPage.clickLogInButton();
         authorizationPage.login(credentials.getEmail(), credentials.getPassword());

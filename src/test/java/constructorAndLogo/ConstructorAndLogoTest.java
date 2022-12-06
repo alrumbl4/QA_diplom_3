@@ -1,4 +1,4 @@
-package constructor;
+package constructorAndLogo;
 
 import com.codeborne.selenide.Configuration;
 import io.qameta.allure.Description;
@@ -17,7 +17,7 @@ import site.stellarburgers.app.*;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 
-public class ConstructorTest {
+public class ConstructorAndLogoTest {
 
     private UserClient userClient;
     private User user;
@@ -27,25 +27,19 @@ public class ConstructorTest {
     Header header = page(Header.class);
     MainPage mainPage = page(MainPage.class);
     AuthorizationPage authorizationPage = page(AuthorizationPage.class);
-    RegistrationPage registrationPage = page(RegistrationPage.class);
-    ProfilePage profilePage = page(ProfilePage.class);
-    PasswordRecoveryPage passwordRecoveryPage = page(PasswordRecoveryPage.class);
 
     @Before
     public void setUp() {
         //Для тестов через яндекс браузер нужно раскоментировать строки ниже
         /*System.setProperty("webdriver.chrome.driver","/Users/alrum/Documents/WebDriver/bin/chromedriver");
         Configuration.browserBinary = "/Applications/Yandex.app/Contents/MacOS/Yandex";*/
-        //Configuration.headless = true;
+        Configuration.headless = true;
         userClient = new UserClient();
         user = UserGenerator.getDefaultUser();
         credentials = Credentials.from(user);
+        ValidatableResponse responseRegistration = userClient.registrationUser(user);
+        accessToken = responseRegistration.extract().path("accessToken");
         open(URL_MAIN_PAGE);
-        header.clickPersonalAccountButton();
-        authorizationPage.clickRegistrationButton();
-        registrationPage.registration(user.getName(), user.getEmail(), user.getPassword());
-        ValidatableResponse validatableResponse = userClient.authorizationUser(credentials);
-        accessToken = validatableResponse.extract().path("accessToken");
     }
 
     @After
@@ -55,11 +49,25 @@ public class ConstructorTest {
 
     @Test
     @DisplayName("Переход из личного кабинета в конструктор")
-    @Description("Проверяем, что после авторизации имеется возможность перейти в конструктор бургеров")
+    @Description("Проверяем, что со страницы профиля пользователя можно перейти в конструктор бургеров")
     public void transitionToTheConstructor() {
+        header.clickPersonalAccountButton();
         authorizationPage.login(credentials.getEmail(), credentials.getPassword());
         header.clickPersonalAccountButton();
         header.clickConstructorButton();
+        String actual = mainPage.getTheTextCollectTheBurger();
+        String expected = "Соберите бургер";
+        Assert.assertEquals("Данные не совпадают", actual, expected);
+    }
+
+    @Test
+    @DisplayName("Переход на главную страницу по клику на логотип")
+    @Description("Проверяем, что со страницы профиля пользователя можно перейти на главную страницу кликнув на логотип")
+    public void goToTheMainPageByClickingOnTheLogo() {
+        header.clickPersonalAccountButton();
+        authorizationPage.login(credentials.getEmail(), credentials.getPassword());
+        header.clickPersonalAccountButton();
+        header.clickButtonOnTheLogo();
         String actual = mainPage.getTheTextCollectTheBurger();
         String expected = "Соберите бургер";
         Assert.assertEquals("Данные не совпадают", actual, expected);

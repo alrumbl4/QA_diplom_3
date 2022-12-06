@@ -25,6 +25,12 @@ public class MainPage {
     @FindBy(how = How.XPATH,using = "//*[@id=\"root\"]/div/main/section[1]/h1")
     private SelenideElement collectTheBurgerHeadline;
 
+    @FindBy(how = How.XPATH,using = "//*[@id=\"root\"]/div/main/section[1]/div[2]/ul[2]/a[3]/p")
+    private SelenideElement traditionalGalacticSauce;
+
+    @FindBy(how = How.XPATH,using = "//*[@id=\"root\"]/div/main/section[1]/div[2]/ul[3]/a[9]/p")
+    private SelenideElement cheeseWithAsteroidMold;
+
     @Step("Клик по кнопке 'Войти в аккаунт'")
     public AuthorizationPage clickSignInToAccountButton() {
         signInToAccountButton.click();
@@ -50,5 +56,30 @@ public class MainPage {
     @Step("Получить текст заголовока 'Собери бургер'")
     public String getTheTextCollectTheBurger() {
         return collectTheBurgerHeadline.getText();
+    }
+
+    @Step("Получить название соуса 'Традиционный галактический'")
+    public String getHeadingSauces() {
+        return traditionalGalacticSauce.getText();
+    }
+
+    @Step("Получить название начинки 'Сыр с астероидной плесенью'")
+    public String getCheeseWithAsteroidMold() {
+        return cheeseWithAsteroidMold.getText();
+    }
+
+    @Step("Получить class кнопки 'Булки>'")
+    public String getClassBunsButton() {
+        return bunsButton.getAttribute("class");
+    }
+
+    @Step("Получить class кнопки 'Соусы'")
+    public String getClassSaucesButton() {
+        return sausesButton.getAttribute("class");
+    }
+
+    @Step("Получить class кнопки 'Начинки'")
+    public String getClassFillingButton() {
+        return fillingButton.getAttribute("class");
     }
 }

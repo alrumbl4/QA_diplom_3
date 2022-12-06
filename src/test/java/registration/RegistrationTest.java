@@ -1,5 +1,6 @@
 package registration;
 
+import com.codeborne.selenide.Configuration;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
@@ -33,6 +34,7 @@ public class RegistrationTest {
         //Для тестов через яндекс браузер нужно раскоментировать строки ниже
         /*System.setProperty("webdriver.chrome.driver","/Users/alrum/Documents/WebDriver/bin/chromedriver");
         Configuration.browserBinary = "/Applications/Yandex.app/Contents/MacOS/Yandex";*/
+        Configuration.headless = true;
         open(URL_MAIN_PAGE);
     }
 

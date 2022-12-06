@@ -22,4 +22,9 @@ public class ProfilePage {
     public String getNameFromNameField() {
         return nameField.getText();
     }
+
+    @Step("Клик по кнопке 'Выйти'")
+    public void clickExitButton() {
+        exitButton.click();
+    }
 }
