@@ -20,6 +20,7 @@ import site.stellarburgers.app.ProfilePage;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 
+@DisplayName("Выход из аккаунта")
 public class logOutTest {
 
     private UserClient userClient = new UserClient();
