@@ -11,6 +11,7 @@ import site.stellarburgers.app.MainPage;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 
+@DisplayName("Переключение между разделами конструктора")
 public class switchingBetweenDesignerTabsTest {
 
     MainPage mainPage = page(MainPage.class);

@@ -18,6 +18,7 @@ import site.stellarburgers.app.*;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 
+@DisplayName("Авторизация")
 public class AuthorizationTest {
 
     private UserClient userClient;

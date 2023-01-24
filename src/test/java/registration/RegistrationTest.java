@@ -15,6 +15,7 @@ import site.stellarburgers.app.RegistrationPage;
 
 import static com.codeborne.selenide.Selenide.*;
 
+@DisplayName("Регистрация")
 public class RegistrationTest {
 
     private UserClient userClient;
