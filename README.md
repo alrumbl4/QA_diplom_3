@@ -3,7 +3,7 @@
  <img width="45%" title="Book Store" src="images/logo.png">
  </p>
  
-## Покрытый функционал
+## <img width="4%" title="Done" src="images/done.png"> Покрытый функционал
 
  > Разработаны автотесты на <code>UI</code>.
 
@@ -27,12 +27,7 @@
       - «Булки»
       - «Соусы»
       - «Начинки»
- ## Отчет о результатах тестирования в Allure Report
- ### :dart: Главная страница Allure-отчета
- <p align="center">
- <img title="Allure_report" src="images/allure_report.png">
- </p>
- 
+
  ## <img width="4%" title="Technologies" src="images/techno_logo.png"> Технологический стек
  
 <p align="center">
@@ -54,3 +49,9 @@
 > В качестве библиотеки для модульного тестирования используется <code>JUnit 4</code>.
 >
 
+
+ ## <img width="4%" title="Report" src="images/report.png"> Отчет о результатах тестирования в Allure Report
+ ### :dart: Главная страница Allure-отчета
+ <p align="center">
+ <img title="Allure_report" src="images/allure_report.png">
+ </p>
